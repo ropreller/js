@@ -1,7 +1,7 @@
 /**
- * Clase creada para el objeto clase
- * Enfocada en clases para rutinas de ejercicios: Idea de proyecto final.
- * IMPORTANTE: para inciar, digitar iniciarSimulador(); en consola del navegador.
+* 06.02.2022, Rodrigo Oportus.
+* Entrega clase 6: Arrays.
+* Se añade concepto de añadir tipos de ejercicios a la clase mediante arrays y objetos.
  */
 
 
