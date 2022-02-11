@@ -2,10 +2,8 @@ class Ejericio {
 
     constructor(item) {
         this.nombre = item.nombre;
-        this.tipo = item.tipo;
         this.repeticiones = item.repeticiones;
         this.vueltas = item.vueltas;
-        this.variacion = item.variacion;
     }
 
 }
@@ -15,15 +13,15 @@ const Calentamiento = [];
 const Principal = [];
 const Final = [];
 const Clase = [];
+const Duracion = [];
 let seccion = 0;
+let totalClase = 0;
 let paso = 0;
 let continua = 0;
 let itemEjercicio = {
     nombre: "",
-    tipo: "",
     repeticiones: "",
     vueltas: "",
-    variacion: ""
 }
 
 
@@ -38,10 +36,6 @@ function anadirSeccion(seccion) {
     while (nombreItem == '' || !nombreItem) {
         nombreItem = prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`);
     }
-    tipoItem = prompt(`${nombreSeccion}: ¿Tipo del ejercicio?`);
-    while (tipoItem == '' || !tipoItem) {
-        tipoItem = prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`);
-    }
     repsItem = parseInt(prompt(`${nombreSeccion}: ¿repeticiones del ejercicio?`));
     while ((repsItem == '' || !repsItem || isNaN(repsItem))) {
         repsItem = parseInt(prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`));
@@ -50,17 +44,11 @@ function anadirSeccion(seccion) {
     while ((vueltasItem == '' || !vueltasItem || isNaN(vueltasItem))) {
         vueltasItem = parseInt(prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`));
     }
-    variacionItem = prompt(`${nombreSeccion}: Variación del ejercicio?`);
-    while ((variacionItem == '' || !variacionItem)) {
-        variacionItem = prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`);
-    }
 
     itemEjercicio = {
         nombre: nombreItem,
-        tipo: tipoItem,
         repeticiones: repsItem,
         vueltas: vueltasItem,
-        variacion: variacionItem
     }
 
     let insertarEjercicio = new Ejericio(itemEjercicio);
@@ -91,10 +79,14 @@ function continuar() {
     }
     if (continua === 1) {
         anadirSeccion(seccion);
-    } else if (continua === 2) {  
-        console.log("seccion ",seccion);
+    } else if (continua === 2) {
+        let tiempo = prompt("¿Duración del módulo? (minutos)");
+        while ((tiempo == '' || !tiempo || isNaN(tiempo))) {
+            tiempo = parseInt(prompt(`PRECAUCIÓN, debes ingresar un valor correcto:`));
+        }
+        anadirTiempo(seccion,tiempo);
         seccion++;
-        console.log("seccion ",seccion);
+        
         if (seccion === 1 || seccion === 2) {
             anadirSeccion(seccion);
         } else {
@@ -107,15 +99,30 @@ function continuar() {
     continua = 0;
 }
 
+function anadirTiempo (seccion,tiempo){
+    (seccion==0||seccion==1||seccion==2) ? Duracion.push(parseInt(tiempo))
+      : '';
+}
+
 function generarClase(){
     Clase.push(Calentamiento);
     Clase.push(Principal);
     Clase.push(Final);
+    sumarTiempoTotal();
     mostrarClase();
 }
 
+function sumarTiempoTotal() {
+    totalClase = Duracion.reduce(
+       (acumulador, elemento) => acumulador + elemento,0);
+}
+
+
+
 function mostrarClase(){
     console.log("Clase, ", Clase);
+    console.log("Tiempo Cada ejercicio" , Duracion);
+    console.log("Tiempo total" , totalClase);
 }
 
 

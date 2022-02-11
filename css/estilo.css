@@ -5,16 +5,8 @@ Nav:
 nav {
     width:100%;
     height:fit-content;
-    background-color: black;
+    background-color: rgb(70, 70, 70);
     color:white;
-    display:inline-block;
-}
-
-nav ul {
-    list-style: none;
-}
-
-nav li {
     display:inline-block;
 }
 
@@ -27,17 +19,57 @@ nav li {
 Sidebar:
 */
 .sidebar {
-    width:25%;
-    background-color: cadetblue;
-    height: 100%;
+    width:400px;
+    background-color: rgb(70, 70, 70);;
+    position: absolute;
+    left:-337px;
+    list-style-type: none;
+    -webkit-transition: all .3s linear 0s;
+    transition: all .3s linear 0s;
 }
 
-.sidebar ul {
+.sidebar.shown {
+    background-color: rgb(32, 32, 32);
+    position: absolute;
+    left:0px;
+}
+
+.sideBarBtn {
+    float:right;
+    padding:23px;
+    background-color: rgb(190, 187, 15);;
+    color:#FFFFFF;
+    cursor: pointer;
+    font-size: 1.8em;
+}
+
+.sideBarBtn.shown {
+    background-color: rgb(207, 52, 52);;
+}
+
+.ulSidebar {
     list-style: none;
     margin:0px;
     padding:0px;
+    list-style-type: none;
 }
 
+.ulSidebar li
+    ,a
+    ,a:visited
+    {
+    padding:25px;
+    text-decoration: none;
+    color:#FFFFFF;
+    list-style-type: none;
+    font-size: 1.2em;
+
+}
+
+.ulSidebar li a:hover
+    {
+    background-color: blue;
+}
 
 /*
 Textos:
