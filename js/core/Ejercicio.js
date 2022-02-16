@@ -123,7 +123,29 @@ function mostrarClase(){
     console.log("Clase, ", Clase);
     console.log("Tiempo Cada ejercicio" , Duracion);
     console.log("Tiempo total" , totalClase);
+    
+
+    const bloquesEjercicio = document.getElementById("elemRutina");
+    let contenedor = document.createElement("div");
+    contenedor.innerHTML = `
+        <p>Duración total de rutina: ${totalClase} Minutos</p>
+        `;
+    bloquesEjercicio.appendChild(contenedor);
+    
+   /* 
+        TODO: Revisar como mejorar objetos para iterar por cada bloque.
+   Calentamiento.map(item => {
+        contenedor.innerHTML = `
+        <p>Prueba de Calentamiento: ${item} </p>
+        `;
+        bloquesEjercicio.appendChild(contenedor);
+    });
+    
+    */
+
 }
 
 
-anadirSeccion(seccion);
+//anadirSeccion(seccion);
+
+
