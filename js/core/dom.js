@@ -34,8 +34,6 @@ const sidebar = document.getElementById("sidebar");
 const btnSidebar = document.querySelector(".sideBarBtn");
 const cc = document.getElementById("navBottom");
 btnSidebar.onclick = () => {
-    console.log(cc);
-
     (sidebar.className === "sidebar") ? btnSidebar.innerHTML = "&#x2039;"
     :  btnSidebar.innerHTML = "&#x203A;";
     sidebar.classList.toggle('shown');  
@@ -50,6 +48,6 @@ btnSidebar.onclick = () => {
 const btnRutina = document.querySelector(".crearRutina");
 
 btnRutina.onclick = () => {
-   anadirSeccion(0);
+   addEjercicios();
 }
 

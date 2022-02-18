@@ -1,3 +1,9 @@
+/**
+ * Clases: Se crearán clases que permitan crear rutinas de ejercicios.
+ * Se dividen del elemento más básico al más complejo que compone la rutina.
+ */
+
+
 class Ejericio {
 
     constructor(item) {
@@ -8,6 +14,24 @@ class Ejericio {
 
 }
 
+class Bloque {
+    constructor (item){
+        this.nombre = item.nombre;
+        this.bloque = item.bloque;
+        this.duracion = item.duracion;
+    }
+}
+
+class Rutina {
+
+    constructor(item){
+        this.calentamiento = item.calentamiento;
+        this.principal = item.principal;
+        this.final= item.final;
+
+    }
+
+}
 // Globales:
 const Calentamiento = [];
 const Principal = [];
@@ -131,21 +155,8 @@ function mostrarClase(){
         <p>Duración total de rutina: ${totalClase} Minutos</p>
         `;
     bloquesEjercicio.appendChild(contenedor);
-    
-   /* 
-        TODO: Revisar como mejorar objetos para iterar por cada bloque.
-   Calentamiento.map(item => {
-        contenedor.innerHTML = `
-        <p>Prueba de Calentamiento: ${item} </p>
-        `;
-        bloquesEjercicio.appendChild(contenedor);
-    });
-    
-    */
-
+  
 }
 
-
-//anadirSeccion(seccion);
 
 
