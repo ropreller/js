@@ -3,31 +3,35 @@ const YEAR = d.getFullYear();
 
 const itemsNav = [
     {
-        id:0,
+        id: 0,
         nombre: "Index del sitio",
         tag: "Home",
-        url: "index.html"
+        url: "index.html",
+        active: true,
     },
     {
-        id:1,
+        id: 1,
         nombre: "Sección rutinas",
         tag: "Rutinas",
-        url: "index.html"
+        url: "index.html",
+        active: true,
     },
     {
-        id:2,
+        id: 2,
         nombre: "Sección 3",
         tag: "Sección 3",
-        url: "index.html"
+        url: "index.html",
+        active: false,
     },
     {
-        id:3,
+        id: 3,
         nombre: "Sección 4",
         tag: "Otra sección",
-        url: "index.html"
+        url: "index.html",
+        active: false,
     },
     {
-        id:4,
+        id: 4,
         tag: "ropreller",
     },
 ];
@@ -37,6 +41,8 @@ for (const item of itemsNav) {
     let liNav = document.createElement("li");
     liNav.className = "navItem";
     liNav.id = item.id;
-    liNav.innerHTML = (item.id ==4) ? `<span id="navBottom">${item.tag} - ${YEAR}</span>` : `<a href="${item.url}">${item.tag}</a>`;
+    liNav.innerHTML = (item.id == 4) ? `<span id="navBottom">${item.tag} - ${YEAR}</span>`
+        : (item.id != 4 && item.active) ? `<a href="${item.url}">${item.tag}</a>`
+            : '';
     listado.appendChild(liNav);
 }

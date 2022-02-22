@@ -14,8 +14,9 @@ class Ejericio {
 
 class Bloque {
     constructor(item) {
+        this.id = item.id;
         this.nombre = item.nombre;
-        this.bloque = item.bloque;
+        this.ejercicios = item.ejercicios;
         this.duracion = item.duracion;
     }
 }
@@ -39,7 +40,7 @@ let itemEjercicio = {
 
 let itemBloque = {
     nombre: "",
-    bloque: [],
+    ejercicios: [],
     duracion: 0
 }
 
@@ -101,7 +102,7 @@ function continuar() {
 
         itemBloque = {
             nombre: nombreBloque,
-            bloque: Ejercicios,
+            ejercicios: Ejercicios,
             duracion: tiempo
         }
         let insertarBloque = new Bloque(itemBloque);
@@ -140,6 +141,28 @@ function generarClase() {
     mostrarClase();
 }
 
+function createRoutineBlock(id,blockName){
+    itemBloque = {
+        id: id,
+        nombre: blockName,
+        ejercicios: [],
+        duracion: 0
+    }
+    let insertarBloque = new Bloque(itemBloque);
+    return insertarBloque;
+}
+
+function createExercise(exerciseName,exerciseReps,exerciseLaps){
+    itemEjercicio = {
+        nombre: exerciseName,
+        repeticiones: exerciseReps,
+        vueltas: exerciseLaps,
+    }
+    let insertarEjercicio = new Ejericio(itemEjercicio);
+    Ejercicios.push(insertarEjercicio);
+    return Ejercicios;
+}
+
 /*
 function sumarTiempoTotal() {
     totalClase = Duracion.reduce(
@@ -157,9 +180,14 @@ function mostrarClase() {
     contenedor.appendChild(tituloRutina);
 
     for (let item of RutinaLista.bloques) {
-        let pElement = document.createElement("H3");
-        pElement.innerHTML = `${item.nombre}`;
-        contenedor.appendChild(pElement);
+        let nombreBloque = document.createElement("H3");
+        nombreBloque.innerHTML = `${item.nombre}`;
+        contenedor.appendChild(nombreBloque);
+        for (let subitem of item.ejercicios) {
+            let nombreEjercicio = document.createElement("H3");
+            nombreEjercicio.innerHTML = `${subitem.nombre} : ${subitem.repeticiones} reps  | ${subitem.vueltas}`;
+            contenedor.appendChild(nombreEjercicio);
+        }
     }
     bloquesEjercicio.appendChild(contenedor);
 }

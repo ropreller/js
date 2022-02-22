@@ -24,6 +24,36 @@ body.dark {
     float: left;
 }
 
+.centerText {
+    text-align: center;
+}
+
+.container {
+    width:100%;
+    padding-left: 43px;
+    background-color: aliceblue;
+    -webkit-transition: all .3s linear 0s;
+    transition: all .3s linear 0s;
+}
+
+.container.containerCompress {
+    padding-left: 400px;
+    background-color: red;
+}
+
+.column {
+    width:50%;
+    float:left;
+    background-color: bisque;
+    height:30px;
+}
+
+.column {
+    width:50%;
+    float:left;
+    background-color: bisque;
+    height:30px;
+}
 /*
 Header:
 */
@@ -140,7 +170,7 @@ Sidebar:
 Elementos de rutina
 */
 
-.crearRutina {
+.modalRutina {
     width:100px;
     cursor: pointer;
     color:#FFFFFF;
@@ -152,7 +182,7 @@ Elementos de rutina
     transition: all .3s linear 0s;
 }
 
-.crearRutina:hover {
+.modalRutina:hover {
     width:120px;
 }
 
@@ -162,5 +192,142 @@ Elementos de rutina
     background-color: beige;
     float:none;
     margin: 0 auto;
+}
+
+/*
+* Modal:
+*/
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    overflow-y: auto;    
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.contentContainer {
+    width:50%;
+    float:left;
+   /* background-color: red; */
+}
+
+.inputTitle {
+   width: 200px;
+   display: inline-block;
+}
+
+input[type=text],
+input[type=number] {
+width: 200px;
+padding: 12px 20px;
+margin: 2px 0;
+font-size: 16px;
+box-sizing: border-box;
+border: 2px solid #ccc;
+background-color: white;
+}
+
+input[type=text].blockTitle {
+    width:400px;
+}
+
+input[type=text].search {
+background-image: url('../media/img/lupa.png');
+background-position: 1px 10px; 
+background-repeat: no-repeat;
+padding: 12px 20px 12px 40px;
+transition: width 0.4s ease-in-out;
+
+}
+input[type=text].search:focus {
+    width: 70%;
+}
+
+.btnAdd {
+    background-color: rgb(38, 134, 38);
+    padding:15px;
+    color:#FFFFFF;
+    border: 0;
+    cursor: pointer;
+    width:200px;
+}
+
+.btnAdd.exercise {
+    background-color: rgb(38, 134, 38);
+    padding:15px;
+    color:#FFFFFF;
+    border: 0;
+    cursor: pointer;
+    width:200px;
+}
+
+.btnAdd.block {
+    background-color: rgb(200, 149, 8);
+}
+
+.btnAdd:hover {
+    background-color: rgb(26, 197, 26);
+}
+
+.btnAdd.block:hover {
+    background-color: rgb(226, 78, 9);
+}
+
+.btnAdd.disabled {
+    background-color:red;
+    cursor:none;
+}
+
+.btnRemove {
+    background-color: rgb(218, 100, 32);
+    padding:15px;
+    color:#FFFFFF;
+    border: 0;
+    cursor: pointer;
+}
+
+.btnRemove:hover {
+    background-color: rgb(241, 119, 62);
+}
+
+.exercisesContainer {
+    display:none;
+}
+.exercisesContainer.shown {
+    display:block;
 }
 
