@@ -93,10 +93,10 @@ function asignarNombrePrincipal() {
  * createdBlock: Objeto del tipo bloque
  */
 
-let btnAddRoutineBlock = document.getElementById("addBlock");
+const btnAddRoutineBlock = document.getElementById("addBlock");
 let txtAddRoutineBlock = document.getElementsByClassName("blockTitle")[0];
 const blockContent = document.getElementById("blockSection");
-let id = 0;
+let idBloque = 0;
 let createdBlock = {};
 btnAddRoutineBlock.onclick = () => {
    if (!txtAddRoutineBlock.value || txtAddRoutineBlock.value == "") {
@@ -106,14 +106,45 @@ btnAddRoutineBlock.onclick = () => {
       btnAddRoutineBlock.setAttribute("disabled",true);
       btnAddRoutineBlock.classList.add("disabled");
       txtAddRoutineBlock.setAttribute("disabled",true);
-      createdBlock = createRoutineBlock(id,txtAddRoutineBlock.value);
-      id ++;
+      createdBlock = createRoutineBlock(idBloque,txtAddRoutineBlock.value);
+      idBloque ++;
       // obtener elemento del bloque y asignar el creado:
       let blockTitle = document.createElement("H2");
       blockTitle.innerHTML += createdBlock.nombre;
       blockContent.appendChild(blockTitle);
      }
 }
+
+/**
+ * Terminar bloque:
+ * Resetea el objeto bloque, oculta campos de ejercicios y desbloquea campo bloque.
+ * Como mínimo debe haber 1 ejercicio ingresado (por ende, un bloque ya creado).
+ */
+const btnCompleteBlock = document.getElementById("finishBlock");
+let Routine = {};
+btnCompleteBlock.onclick = () => {
+   if(idBloque==1) {
+     exercisesContainer.classList.remove("shown");
+     btnAddRoutineBlock.removeAttribute("disabled")
+     btnAddRoutineBlock.classList.remove("disabled");
+     txtAddRoutineBlock.removeAttribute("disabled");
+     txtAddRoutineBlock.value = "";
+     let name = "Rodrigo";
+     Routine = createRoutine(name,createdBlock);
+     Ejercicios = [];
+     createdBlock = {};
+     exerciseCounter = 0;
+     console.log("RUTINA", Routine);
+   } else {
+      // pushear bloque a rutina actual
+      Routine.bloques.push(createdBlock);
+      Ejercicios = [];
+      createdBlock = {};
+      exerciseCounter = 0;
+      console.log("RUTINA", Routine);
+   }
+}
+
 
 /**
  * Crear ejercicios
@@ -144,7 +175,10 @@ btnAddExercise.onclick = () => {
       exerciseReps.value="";
       exerciseLaps.value="";
       exerciseCounter ++;
+      console.log("Ejercicios" ,Ejercicios);
+      console.log("Bloque" ,createdBlock);
    }
 
 }
+
 
