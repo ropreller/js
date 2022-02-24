@@ -130,16 +130,26 @@ btnCompleteBlock.onclick = () => {
      txtAddRoutineBlock.removeAttribute("disabled");
      txtAddRoutineBlock.value = "";
      let name = "Rodrigo";
-     Routine = createRoutine(name,createdBlock);
+     Routine = createRoutine(name,Bloques);
      Ejercicios = [];
      createdBlock = {};
+     Bloques = [];
      exerciseCounter = 0;
      console.log("RUTINA", Routine);
    } else {
       // pushear bloque a rutina actual
-      Routine.bloques.push(createdBlock);
+      exercisesContainer.classList.remove("shown");
+      btnAddRoutineBlock.removeAttribute("disabled")
+      btnAddRoutineBlock.classList.remove("disabled");
+      txtAddRoutineBlock.removeAttribute("disabled");
+      txtAddRoutineBlock.value = "";
+      let name = "Rodrigo";
+      Routine = {
+         
+      };
       Ejercicios = [];
       createdBlock = {};
+      Bloques = [];
       exerciseCounter = 0;
       console.log("RUTINA", Routine);
    }

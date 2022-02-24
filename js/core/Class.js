@@ -60,6 +60,7 @@ function createRoutineBlock(id,blockName){
         duracion: 0
     }
     let insertarBloque = new Bloque(itemBloque);
+    Bloques.push(insertarBloque)
     return insertarBloque;
 }
 
