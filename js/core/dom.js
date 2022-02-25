@@ -11,15 +11,10 @@ const containerDiv = document.getElementById('container');
  */
 
 let columnLeft = document.createElement("div");
-let columnRight = document.createElement("div");
 columnLeft.className = "column";
-columnRight.className = "column";
 let optionCreateRoutine = '<button class="modalRutina">Crear Rutina</button>';
-let optionWatchRoutines = '<button class="modalRutina">Ver Rutinas</button>';
 columnLeft.innerHTML = optionCreateRoutine;
-columnRight.innerHTML = optionWatchRoutines;
 containerDiv.appendChild(columnLeft);
-containerDiv.appendChild(columnRight);
 
 /**
  * Color theme
@@ -96,12 +91,14 @@ function asignarNombrePrincipal() {
 const btnAddRoutineBlock = document.getElementById("addBlock");
 let txtAddRoutineBlock = document.getElementsByClassName("blockTitle")[0];
 const blockContent = document.getElementById("blockSection");
+const createBlockContainer = document.getElementById("createBlockContainer");
 let idBloque = 0;
 let createdBlock = {};
 btnAddRoutineBlock.onclick = () => {
    if (!txtAddRoutineBlock.value || txtAddRoutineBlock.value == "") {
       Swal.fire('Nombre del bloque es necesario.')
    } else {
+      createBlockContainer.classList.add("exercisesContainer");
       exercisesContainer.classList.add("shown");
       btnAddRoutineBlock.setAttribute("disabled",true);
       btnAddRoutineBlock.classList.add("disabled");
@@ -123,36 +120,41 @@ btnAddRoutineBlock.onclick = () => {
 const btnCompleteBlock = document.getElementById("finishBlock");
 let Routine = {};
 btnCompleteBlock.onclick = () => {
-   if(idBloque==1) {
-     exercisesContainer.classList.remove("shown");
-     btnAddRoutineBlock.removeAttribute("disabled")
-     btnAddRoutineBlock.classList.remove("disabled");
-     txtAddRoutineBlock.removeAttribute("disabled");
-     txtAddRoutineBlock.value = "";
-     let name = "Rodrigo";
-     Routine = createRoutine(name,Bloques);
-     Ejercicios = [];
-     createdBlock = {};
-     Bloques = [];
-     exerciseCounter = 0;
-     console.log("RUTINA", Routine);
+   if(Ejercicios.length==0){
+      Swal.fire('Debe haber ejercicios añadidos')
    } else {
-      // pushear bloque a rutina actual
-      exercisesContainer.classList.remove("shown");
-      btnAddRoutineBlock.removeAttribute("disabled")
-      btnAddRoutineBlock.classList.remove("disabled");
-      txtAddRoutineBlock.removeAttribute("disabled");
-      txtAddRoutineBlock.value = "";
-      let name = "Rodrigo";
-      Routine = {
-         
-      };
-      Ejercicios = [];
-      createdBlock = {};
-      Bloques = [];
-      exerciseCounter = 0;
-      console.log("RUTINA", Routine);
+      if(idBloque==1) {
+           createBlockContainer.classList.remove("exercisesContainer");
+           exercisesContainer.classList.remove("shown");
+           btnAddRoutineBlock.removeAttribute("disabled")
+           btnAddRoutineBlock.classList.remove("disabled");
+           txtAddRoutineBlock.removeAttribute("disabled");
+           txtAddRoutineBlock.value = "";
+           let routineName = "Rutina ejemplo";
+           Routine = createRoutine(routineName,Bloques);
+           Ejercicios = [];
+           createdBlock = {};
+           exerciseCounter = 0;
+           console.log("RUTINA", Routine);
+         } else {
+            createBlockContainer.classList.remove("exercisesContainer");
+            exercisesContainer.classList.remove("shown");
+            btnAddRoutineBlock.removeAttribute("disabled")
+            btnAddRoutineBlock.classList.remove("disabled");
+            txtAddRoutineBlock.removeAttribute("disabled");
+            txtAddRoutineBlock.value = "";
+            let routineName = "Rutina ejemplo";
+            Routine = {
+               nombre: routineName,
+               bloques: Bloques
+            };
+            Ejercicios = [];
+            createdBlock = {};
+            exerciseCounter = 0;
+            console.log("RUTINA", Routine);
+         }
    }
+   
 }
 
 
@@ -191,4 +193,51 @@ btnAddExercise.onclick = () => {
 
 }
 
+/**
+ * Terminar de crear una rutina
+ */
 
+const btnTerminarRutina = document.getElementById("finishCreateRoutine");
+const routineTableContainer = document.getElementById("routineTableContainer"); 
+const routineTable = document.getElementById("routineTable"); 
+ 
+btnTerminarRutina.onclick = () => {
+   let createdRoutines = finishRoutine(Routine);
+   // Local Storage de rutina:
+   localStorage.setItem("Rutinas", JSON.stringify(createdRoutines));
+   if(createdRoutines) {
+      Swal.fire('Rutina creada con éxito');
+      console.log("createdRoutines", createdRoutines);
+      console.log("length createdRoutines", createdRoutines.length);
+      if(createdRoutines.length>0){
+         // Mostrar rutinas en DOM:
+         routineTableContainer.classList.remove("hide");
+         let pElement = document.createElement("p");
+         for (routine of createdRoutines) {
+            let element = `Nombre Rutina: ${routine.nombre} | bloques: ${routine.bloques.length}`;
+            pElement.innerHTML += element;
+            routineTable.appendChild(pElement);
+         }
+      } else {
+         // no existen rutinas
+         routineTableContainer.classList.add("hide");
+      }
+   }
+
+}
+
+function checkIfCreated() {
+   const previousCreatedRoutines = JSON.parse(localStorage.getItem("Rutinas"));
+   console.log("PREVIOUS",previousCreatedRoutines);
+   if(previousCreatedRoutines) {
+      // Mostrar rutinas en DOM:
+      routineTableContainer.classList.remove("hide");
+      let pElement = document.createElement("p");
+      for (routine of previousCreatedRoutines) {
+         let element = `Nombre Rutina: ${routine.nombre} | bloques: ${routine.bloques.length}`;
+         pElement.innerHTML += element;
+         routineTable.appendChild(pElement);
+      }
+   }
+}
+checkIfCreated();

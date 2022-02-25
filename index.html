@@ -33,7 +33,7 @@
                     <span class="close">&times;</span>
                     <h2 id="routineTitle" class="centerText"></h2>
                     <div class="contentContainer">
-                        <div>
+                        <div id="createBlockContainer">
                             <h4>Nombre Bloque</h4>
                             <input type="text" class="blockTitle">
                             <button id="addBlock" class="btnAdd">Crear bloque</button>
@@ -41,27 +41,37 @@
                         <div class="exercisesContainer">
                             <div>
                                 <h4 class="inputTitle">Nombre Ejercicio</h4>
-                                <input type="text" name="exerciseName"  id="exerciseName" placeholder="Buscar ejercicio..." class="search">
+                                <input type="text" name="exerciseName" id="exerciseName"
+                                    placeholder="Buscar ejercicio..." class="search">
                             </div>
                             <div>
                                 <h4 class="inputTitle">Número Repeticiones</h4>
-                                <input type="number" name="exerciseReps" id="exerciseReps" placeholder="Ingresar repeticiones">
+                                <input type="number" name="exerciseReps" id="exerciseReps"
+                                    placeholder="Ingresar repeticiones">
                             </div>
                             <div>
                                 <h4 class="inputTitle">Número Vueltas</h4>
-                                <input type="number" name="exerciseLaps" id="exerciseLaps" placeholder="Ingresar vueltas">
+                                <input type="number" name="exerciseLaps" id="exerciseLaps"
+                                    placeholder="Ingresar vueltas">
                             </div>
                             <button id="addExercise" class="btnAdd exercise">Agregar</button>
                             <button id="finishBlock" class="btnAdd block">Terminar bloque</button>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="contentContainer">
                         <div>
-                            <h4  class="inputTitle centerText">Resúmen</h4>
-                            <div id="blockSection"></div>
+                            <h4 class="inputTitle centerText">Resúmen</h4>
+                            <div id="blockSection">
+                            </div>
+                            <button id="finishCreateRoutine" class="btnAdd finishCreateRoutine">Terminar rutina</button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="routineTableContainer" class="routineTableContainer hide">
+                <div id="routineTable">
+                    <h1>Rutinas creadas:</h1>
                 </div>
             </div>
         </div>

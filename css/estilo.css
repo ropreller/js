@@ -28,6 +28,14 @@ body.dark {
     text-align: center;
 }
 
+.show {
+    display:block;
+}
+
+.hide {
+    display:none;
+}
+
 .container {
     width:100%;
     padding-left: 43px;
@@ -299,12 +307,21 @@ input[type=text].search:focus {
     background-color: rgb(200, 149, 8);
 }
 
+.btnAdd.finishCreateRoutine {
+    background-color: rgb(26, 197, 26);
+    width:400px;
+}
+
+
 .btnAdd:hover {
     background-color: rgb(26, 197, 26);
 }
 
 .btnAdd.block:hover {
     background-color: rgb(226, 78, 9);
+}
+.btnAdd.finishCreateRoutine:hover {
+    background-color: rgb(26, 197, 26);
 }
 
 .btnAdd.disabled {
@@ -331,3 +348,13 @@ input[type=text].search:focus {
     display:block;
 }
 
+/*
+Tabla contenedora de rutinas
+*/
+
+.routineTableContainer {
+    position: absolute;
+    top:50%;
+    bottom:50%;
+    right:50%;
+}

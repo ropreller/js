@@ -84,6 +84,14 @@ function createRoutine(name,block){
     return insertedRoutine;
 }
 
+
+function finishRoutine(createdRoutine){
+    Rutinas.push(createdRoutine);
+    console.log("Rutinas creadas: ", Rutinas);
+    return Rutinas;
+}
+
+
 /*
 function sumarTiempoTotal() {
     totalClase = Duracion.reduce(
