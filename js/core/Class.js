@@ -52,12 +52,12 @@ let generarRutina = {
 
 }
 
-function createRoutineBlock(id,blockName){
+function createRoutineBlock(id,blockName,minutes){
     itemBloque = {
         id: id,
         nombre: blockName,
         ejercicios: [],
-        duracion: 0
+        duracion: minutes
     }
     let insertarBloque = new Bloque(itemBloque);
     Bloques.push(insertarBloque)

@@ -4,7 +4,7 @@
  * El objetivo de este listado, es proveer del mismo en el input para asignar los ejercicios en los bloques
  */
 
-const ejercicios = [
+const exercisesList = [
     {
         id:0,
         nombre: "Abdominal",
