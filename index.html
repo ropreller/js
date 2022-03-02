@@ -36,13 +36,16 @@
                         <div id="createBlockContainer">
                             <h4>Nombre Bloque</h4>
                             <input type="text" class="blockTitle">
+                            <h4>Tiempo</h4>
+                            <input type="number" class="blockTitle">
                             <button id="addBlock" class="btnAdd">Crear bloque</button>
                         </div>
+
                         <div class="exercisesContainer">
                             <div>
                                 <h4 class="inputTitle">Nombre Ejercicio</h4>
                                 <input type="text" name="exerciseName" id="exerciseName"
-                                    placeholder="Buscar ejercicio..." class="search">
+                                    placeholder="Buscar ejercicio..." class="search" value="" autocomplete="on">
                             </div>
                             <div>
                                 <h4 class="inputTitle">Número Repeticiones</h4>
@@ -61,8 +64,8 @@
 
                     <div class="contentContainer">
                         <div>
-                            <h4 class="inputTitle centerText">Resúmen</h4>
                             <div id="blockSection">
+                                <h4 class="inputTitle centerText">Resúmen</h4>
                             </div>
                             <button id="finishCreateRoutine" class="btnAdd finishCreateRoutine">Terminar rutina</button>
                         </div>
@@ -77,6 +80,7 @@
         </div>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/data/exercisesApi.js"></script>
     <script src="js/core/Class.js"></script>
     <script src="js/data/Nav.js"></script>
     <script src="js/core/Dom.js"></script>
