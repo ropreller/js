@@ -13,6 +13,8 @@
         rel="stylesheet">
     <!-- Estilos personalizados:-->
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -73,14 +75,27 @@
                 </div>
             </div>
             <div id="routineTableContainer" class="routineTableContainer hide">
-                <div id="routineTable">
-                    <h1>Rutinas creadas:</h1>
-                </div>
+                <table id="routineTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Bloques</th>
+                            <th>Duración</th>
+                            <th>Ver</th>
+                            <th>Borrar</th>
+                        </tr>
+                        <thead>
+                </table>
             </div>
+
+
+
+
         </div>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/data/exercisesApi.js"></script>
+    <script src="js/core/Templates.js"></script>
     <script src="js/core/Class.js"></script>
     <script src="js/data/Nav.js"></script>
     <script src="js/core/Dom.js"></script>

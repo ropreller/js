@@ -8,6 +8,7 @@
 
 const body = document.body;
 const containerDiv = document.getElementById('container');
+//containerDiv.innerHTML = modalDiv;
 let idBloque = 0;
 let exerciseCounter = 0;
 let createdBlock = {};
@@ -101,7 +102,7 @@ let txtAddRoutineBlock = document.getElementsByClassName("blockTitle")[0];
 let timeAddRoutineBlock = document.getElementsByClassName("blockTitle")[1];
 
 btnAddRoutineBlock.onclick = () => {
-   if ((!txtAddRoutineBlock.value || txtAddRoutineBlock.value == "") || (!timeAddRoutineBlock.value || timeAddRoutineBlock.value == "" ) ) {
+   if ((!txtAddRoutineBlock.value || txtAddRoutineBlock.value == "") || (!timeAddRoutineBlock.value || timeAddRoutineBlock.value == "")) {
       Swal.fire('Nombre del bloque es necesario.')
    } else {
       createBlockContainer.classList.add("exercisesContainer");
@@ -109,7 +110,7 @@ btnAddRoutineBlock.onclick = () => {
       btnAddRoutineBlock.setAttribute("disabled", true);
       btnAddRoutineBlock.classList.add("disabled");
       txtAddRoutineBlock.setAttribute("disabled", true);
-      createdBlock = createRoutineBlock(idBloque, txtAddRoutineBlock.value,parseInt(timeAddRoutineBlock.value));
+      createdBlock = createRoutineBlock(idBloque, txtAddRoutineBlock.value, parseInt(timeAddRoutineBlock.value));
       idBloque++;
       // obtener elemento del bloque y asignar el creado:
       let blockTitle = document.createElement("H2");
@@ -183,8 +184,8 @@ let exerciseLaps = document.getElementById("exerciseLaps");
 // Fetch ejercicios: Esperar clase de promises/Fetch
 
 exerciseName.onkeydown = () => {
-  // Usar Promise??
-  // TODO: Obtener listado de exerciseApi.js
+   // Usar Promise??
+   // TODO: Obtener listado de exerciseApi.js
 }
 
 btnAddExercise.onclick = () => {
@@ -221,13 +222,7 @@ RoutineResume.onclick = () => {
       Swal.fire('Rutina creada con éxito');
       if (createdRoutines.length > 0) {
          // Mostrar rutinas en DOM:
-         routineTableContainer.classList.remove("hide");
-         let pElement = document.createElement("p");
-         for (routine of createdRoutines) {
-            let element = `Nombre Rutina: ${routine.nombre} | bloques: ${routine.bloques.length}`;
-            pElement.innerHTML = element;
-            routineTable.appendChild(pElement);
-         }
+         showRoutines(createdRoutines);
          // limpiar inputs de rutina y resetear creador
          RoutineResume.classList.remove("shown");
          createBlockContainer.classList.remove("exercisesContainer");
@@ -253,17 +248,74 @@ RoutineResume.onclick = () => {
 }
 
 // Obtener rutinas creadas desde local storage
+
 function checkIfCreated() {
    const previousCreatedRoutines = JSON.parse(localStorage.getItem("Rutinas"));
    if (previousCreatedRoutines) {
       // Mostrar rutinas en DOM:
-      routineTableContainer.classList.remove("hide");
-      let pElement = document.createElement("p");
-      for (routine of previousCreatedRoutines) {
-         let element = `Nombre Rutina: ${routine.nombre} | bloques: ${routine.bloques.length}`;
-         pElement.innerHTML += element;
-         routineTable.appendChild(pElement);
-      }
+      showRoutines(previousCreatedRoutines);
    }
 }
+
+// Función que imprime las rutinas en dom.
+
+function showRoutines(routines) {
+   routineTableContainer.classList.remove("hide");
+   let pElement = document.createElement("tbody");
+   for (routine of routines) {
+      let element = `<td>${routine.nombre} </td><td>${routine.bloques.length}</td><td>Tiempo</td><td><button id="showRoutine" class="showRoutine"><i class="bi bi-eye"></i></button></td><td><button id="deleteRoutine" class="deleteRoutine"><i class="bi bi-trash3"></i></button></td> </tr>`;
+      pElement.innerHTML = element;
+      routineTable.appendChild(pElement);
+   }
+}
+
+// Preguntar si existe rutinas en la memoria de local storage.
 checkIfCreated();
+
+// Ver rutina: con sweet alert
+
+const btnShowRoutine = document.getElementById("showRoutine");
+
+btnShowRoutine.onclick = () => {
+   Swal.fire({
+      title: '<strong>HTML <u>Falta insertar tabla de rutina</u></strong>',
+      icon: 'info',
+      html:
+         'You can use <b>bold text</b>, ' +
+         '<a href="//sweetalert2.github.io">links</a> ' +
+         'and other HTML tags',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+         '<i class="fa fa-thumbs-up"></i> Great!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+         '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down'
+   });
+}
+
+
+const btnDeleteRoutine = document.getElementById("deleteRoutine");
+
+btnDeleteRoutine.onclick = () => {
+   Swal.fire({
+      title: 'Borrar rutina',
+      text: "Esto borrará la rutina de local storage",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Borrada',
+          'La rutina ya no está en local storage.',
+          'success'
+        )
+      }
+    })
+}
+
