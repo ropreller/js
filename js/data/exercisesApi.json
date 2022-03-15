@@ -1,0 +1,25 @@
+{
+    "exercisesList":[
+        {
+            "name":"Clusters"
+        },
+        {
+            "name":"Squats"
+        },
+        {
+            "name":"Push ups"
+        },
+        {
+            "name":"Burpees"
+        },
+        {
+            "name":"Lunges"
+        },
+        {
+            "name":"Thrusters"
+        },
+        {
+            "name":"Clean & Jerk"
+        }
+    ]
+}

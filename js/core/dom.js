@@ -14,6 +14,8 @@ let exerciseCounter = 0;
 let createdBlock = {};
 let Routine = {};
 
+const URL_API = "js/data/exercisesApi.json";
+
 /**
  * startApp:
  * 1 - Crear elemento HTML botón "crear rutina"
@@ -182,11 +184,40 @@ let exerciseLaps = document.getElementById("exerciseLaps");
 
 
 // Fetch ejercicios: Esperar clase de promises/Fetch
-
-exerciseName.onkeydown = () => {
-   // Usar Promise??
-   // TODO: Obtener listado de exerciseApi.js
+liExercises = document.getElementById("liExercises");
+exerciseName.onkeyup = () => {
+   let key = exerciseName.value;
+   fetch(URL_API)
+   .then(resultado => resultado.json())
+   .then(respuesta => {
+      search = respuesta.exercisesList;
+      let results = [];
+      liExercises.innerHTML = "";
+      if(key!="") {
+         results = search.filter(obj => obj.name.toLowerCase().includes(key.toLowerCase())).map(obj => ({"name":obj.name}));
+         for (let item of results) {
+            const element = document.createElement("li");
+            element.id = "comboSelectExercises";
+            element.value = item.name;
+            element.className = "comboSelectExercises";
+            element.innerHTML = `${item.name}`;
+            liExercises.appendChild(element);
+          }
+          results = []; 
+      } else {
+         liExercises.innerHTML = "";
+      }
+  
+   }).catch(error => console.log(error));
+   
 }
+
+exerciseName.onchange = () => {
+   liExercises.innerHTML = "";
+}
+
+
+ 
 
 btnAddExercise.onclick = () => {
    if (exerciseName.value == "" || exerciseReps.value == "" || exerciseLaps.value == "") {

@@ -46,8 +46,11 @@
                         <div class="exercisesContainer">
                             <div>
                                 <h4 class="inputTitle">Nombre Ejercicio</h4>
-                                <input type="text" name="exerciseName" id="exerciseName"
+                                <input  autocomplete ="off" type="text" name="exerciseName" id="exerciseName"
                                     placeholder="Buscar ejercicio..." class="search" value="" autocomplete="on">
+                                    <div id="liExercises">
+                                    </div>
+                                
                             </div>
                             <div>
                                 <h4 class="inputTitle">Número Repeticiones</h4>
@@ -94,7 +97,6 @@
         </div>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/data/exercisesApi.js"></script>
     <script src="js/core/Templates.js"></script>
     <script src="js/core/Class.js"></script>
     <script src="js/data/Nav.js"></script>

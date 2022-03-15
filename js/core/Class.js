@@ -87,7 +87,6 @@ function createRoutine(name,block){
 
 function finishRoutine(createdRoutine){
     Rutinas.push(createdRoutine);
-    console.log("Rutinas creadas: ", Rutinas);
     return Rutinas;
 }
 
