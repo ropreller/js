@@ -11,10 +11,10 @@ const itemsNav = [
     },
     {
         id: 1,
-        nombre: "Sección rutinas",
-        tag: "Rutinas",
-        url: "index.html",
-        active: true,
+        nombre: "Acerca de",
+        tag: "About",
+        url: "about.html",
+        active: false,
     },
     {
         id: 2,

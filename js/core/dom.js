@@ -22,8 +22,8 @@ const URL_API = "js/data/exercisesApi.json";
  */
 
 let columnLeft = document.createElement("div");
-columnLeft.className = "column";
-let optionCreateRoutine = '<button class="modalRutina">Crear Rutina</button>';
+columnLeft.className = "columnFull";
+let optionCreateRoutine = '<button class="modalRutina">Nueva Rutina</button>';
 columnLeft.innerHTML = optionCreateRoutine;
 containerDiv.appendChild(columnLeft);
 
@@ -105,7 +105,7 @@ let timeAddRoutineBlock = document.getElementsByClassName("blockTitle")[1];
 
 btnAddRoutineBlock.onclick = () => {
    if ((!txtAddRoutineBlock.value || txtAddRoutineBlock.value == "") || (!timeAddRoutineBlock.value || timeAddRoutineBlock.value == "")) {
-      Swal.fire('Nombre del bloque es necesario.')
+      Swal.fire('Nombre del bloquey y tiempo son necesarios.')
    } else {
       createBlockContainer.classList.add("exercisesContainer");
       exercisesContainer.classList.add("shown");
@@ -114,7 +114,6 @@ btnAddRoutineBlock.onclick = () => {
       txtAddRoutineBlock.setAttribute("disabled", true);
       createdBlock = createRoutineBlock(idBloque, txtAddRoutineBlock.value, parseInt(timeAddRoutineBlock.value));
       idBloque++;
-      // obtener elemento del bloque y asignar el creado:
       let blockTitle = document.createElement("H2");
       blockTitle.innerHTML += `${createdBlock.nombre} - ${createdBlock.duracion} minutos`;
       blockContent.appendChild(blockTitle);
@@ -194,30 +193,35 @@ exerciseName.onkeyup = () => {
       let results = [];
       liExercises.innerHTML = "";
       if(key!="") {
-         results = search.filter(obj => obj.name.toLowerCase().includes(key.toLowerCase())).map(obj => ({"name":obj.name}));
+         results = search.filter(obj => obj.name.toLowerCase().includes(key.toLowerCase())).map(obj => ({"id":obj.id,"name":obj.name}));
          for (let item of results) {
             const element = document.createElement("li");
-            element.id = "comboSelectExercises";
-            element.value = item.name;
+            element.id = `comboSelectExercises_${item.id}`;
+            element.value = item.id;
             element.className = "comboSelectExercises";
-            element.innerHTML = `${item.name}`;
-            liExercises.appendChild(element);
+            element.addEventListener('click', function handleClick() {
+               exerciseName.value = item.name;
+               liExercises.innerHTML = ""
+             });
+            element.innerHTML = `${item.name}`
+            liExercises.appendChild(element)
           }
           results = []; 
       } else {
-         liExercises.innerHTML = "";
+         liExercises.innerHTML = ""
       }
   
    }).catch(error => console.log(error));
    
 }
 
+
+
 exerciseName.onchange = () => {
    liExercises.innerHTML = "";
 }
 
 
- 
 
 btnAddExercise.onclick = () => {
    if (exerciseName.value == "" || exerciseReps.value == "" || exerciseLaps.value == "") {
@@ -271,7 +275,6 @@ RoutineResume.onclick = () => {
          exerciseLaps.value = "";
          exerciseCounter = 0;
       } else {
-         // no existen rutinas
          routineTableContainer.classList.add("hide");
       }
    }
@@ -288,44 +291,18 @@ function checkIfCreated() {
    }
 }
 
-// Función que imprime las rutinas en dom.
+// Función imprimir rutinas dom
 
 function showRoutines(routines) {
    routineTableContainer.classList.remove("hide");
    let pElement = document.createElement("tbody");
-   for (routine of routines) {
-      let element = `<td>${routine.nombre} </td><td>${routine.bloques.length}</td><td>Tiempo</td><td><button id="showRoutine" class="showRoutine"><i class="bi bi-eye"></i></button></td><td><button id="deleteRoutine" class="deleteRoutine"><i class="bi bi-trash3"></i></button></td> </tr>`;
+
+   for (let routine of routines) {
+      let element = `<td>${routine.nombre} </td><td>${routine.bloques.length}</td><td><button id="deleteRoutine" class="deleteRoutine"><i class="bi bi-trash3"></i></button></td> </tr>`;
       pElement.innerHTML = element;
       routineTable.appendChild(pElement);
    }
-}
 
-// Preguntar si existe rutinas en la memoria de local storage.
-checkIfCreated();
-
-// Ver rutina: con sweet alert
-
-const btnShowRoutine = document.getElementById("showRoutine");
-
-btnShowRoutine.onclick = () => {
-   Swal.fire({
-      title: '<strong>HTML <u>Falta insertar tabla de rutina</u></strong>',
-      icon: 'info',
-      html:
-         'You can use <b>bold text</b>, ' +
-         '<a href="//sweetalert2.github.io">links</a> ' +
-         'and other HTML tags',
-      showCloseButton: true,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-         '<i class="fa fa-thumbs-up"></i> Great!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-         '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down'
-   });
-}
 
 
 const btnDeleteRoutine = document.getElementById("deleteRoutine");
@@ -341,12 +318,21 @@ btnDeleteRoutine.onclick = () => {
       confirmButtonText: 'Si, borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
+         localStorage.clear();
+        
         Swal.fire(
           'Borrada',
           'La rutina ya no está en local storage.',
           'success'
         )
+        location.reload();
       }
     })
 }
+}
+
+// Preguntar si existe rutinas en la memoria de local storage.
+checkIfCreated();
+
+
 

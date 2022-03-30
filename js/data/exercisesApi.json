@@ -1,24 +1,31 @@
 {
     "exercisesList":[
         {
+            "id": 1,
             "name":"Clusters"
         },
         {
+            "id": 2,
             "name":"Squats"
         },
         {
+            "id": 3,
             "name":"Push ups"
         },
         {
+            "id": 4,
             "name":"Burpees"
         },
         {
+            "id": 5,
             "name":"Lunges"
         },
         {
+            "id": 6,
             "name":"Thrusters"
         },
         {
+            "id": 7,
             "name":"Clean & Jerk"
         }
     ]

@@ -91,13 +91,5 @@ function finishRoutine(createdRoutine){
 }
 
 
-/*
-function sumarTiempoTotal() {
-    totalClase = Duracion.reduce(
-       (acumulador, elemento) => acumulador + elemento,0);
-}
-*/
-
-
 
 
